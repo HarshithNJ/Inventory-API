@@ -3,6 +3,7 @@ package org.inventory.inventory.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.inventory.inventory.dto.item;
 import org.inventory.inventory.repository.itemRepository;
@@ -62,6 +63,23 @@ public class itemService {
             map.put("items", items);
 
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
+
+    public ResponseEntity<Object> getItemById(String id) {
+        Optional<item> item = repository.findById(id);
+
+        if(item.isPresent()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Item fetched successfully");
+            map.put("item", item);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "Item not found with the id :" + id);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
 }
