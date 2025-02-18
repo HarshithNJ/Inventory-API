@@ -100,5 +100,20 @@ public class itemService {
         }
     }
 
-    
+    public ResponseEntity<Object> getItemsByPrice(double price1, double price2) {
+        List<item> items = repository.findByPriceBetween(price1, price2);
+
+        if(items.isEmpty()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No items found with the price range between :" + price1 + " and " + price2);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Items fetched successfully");
+            map.put("items", items);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
 }

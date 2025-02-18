@@ -9,4 +9,6 @@ public interface itemRepository extends JpaRepository<item, String> {
 
     List<item> findByName(String name);
 
+    List<item> findByPriceBetween(double price1, double price2);
+
 }

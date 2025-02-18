@@ -41,4 +41,9 @@ public class itemController {
     public ResponseEntity<Object> getItemByName(@PathVariable String name){
         return service.getItemByName(name);
     }
+
+    @GetMapping("/items/{price1}/{price2}")
+    public ResponseEntity<Object> getItemsByPrice(@PathVariable double price1, @PathVariable double price2){
+        return service.getItemsByPrice(price1, price2);
+    }
 }
