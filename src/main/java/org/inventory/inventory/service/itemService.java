@@ -1,6 +1,7 @@
 package org.inventory.inventory.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.inventory.inventory.dto.item;
@@ -35,6 +36,32 @@ public class itemService {
             map.put("item", item);
 
             return new ResponseEntity<Object>(map, HttpStatus.CREATED);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> getAllItems() {
+        List<item> items = repository.findAll();
+
+        if(items.isEmpty()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No items found");
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Items fetched successfully");
+            map.put("items", items);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
         }
     }
 }
