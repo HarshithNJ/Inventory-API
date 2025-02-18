@@ -82,4 +82,23 @@ public class itemService {
             return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
+
+    public ResponseEntity<Object> getItemByName(String name) {
+        List<item> items = repository.findByName(name);
+
+        if(items.isEmpty()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No items found with the name :" + name);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Items fetched successfully");
+            map.put("items", items);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
+
+    
 }

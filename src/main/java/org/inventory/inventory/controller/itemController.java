@@ -36,4 +36,9 @@ public class itemController {
     public ResponseEntity<Object> getIemById(@PathVariable String id){
         return service.getItemById(id);
     }
+
+    @GetMapping("/items/name/{name}")
+    public ResponseEntity<Object> getItemByName(@PathVariable String name){
+        return service.getItemByName(name);
+    }
 }
