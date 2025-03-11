@@ -116,4 +116,32 @@ public class itemService {
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
         }
     }
+
+
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> deleteById(String id) {
+        Optional<item> item = repository.findById(id);
+
+        if(item.isPresent()){
+            repository.deleteById(id);
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Item deleted successfully");
+            map.put("item", item);
+
+            return new ResponseEntity<Object>(map, HttpStatus.OK);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "Item not found with the id :" + id);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }
+    }
 }
