@@ -144,4 +144,46 @@ public class itemService {
             return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
+
+
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> updateItem(String id, item item) {
+        Optional<item> item1 = repository.findById(id);
+
+        if(item1.isPresent()){
+            item i = item1.get();
+
+            if(item.getName() != null)
+                i.setName(item.getName());
+
+            if(item.getPrice() != 0)
+                i.setPrice(item.getPrice());
+
+            if(item.getQuantity() != 0)
+                i.setQuantity(item.getQuantity());
+
+            if(item.getDescription() != null)
+                i.setDescription(item.getDescription());
+            
+            repository.save(i);
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "Item updated successfully");
+            map.put("item", i);
+
+            return new ResponseEntity<Object>(map, HttpStatus.OK);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "Item not found with the id :" + id);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }
+    }
 }

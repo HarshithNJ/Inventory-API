@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,5 +61,16 @@ public class itemController {
     @DeleteMapping("/items/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable String id){
         return service.deleteById(id);
+    }
+
+
+
+
+
+
+
+    @PatchMapping("/items/{id}")
+    public ResponseEntity<Object> updateItem(@PathVariable String id, @RequestBody item item){
+        return service.updateItem(id, item);
     }
 }
