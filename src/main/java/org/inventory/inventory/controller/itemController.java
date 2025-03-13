@@ -3,6 +3,7 @@ package org.inventory.inventory.controller;
 import org.inventory.inventory.dto.item;
 import org.inventory.inventory.service.itemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
